@@ -6,31 +6,30 @@ import toast from 'react-hot-toast'
 
 const useGetMessages = () => {
     const [loading, setLoading] = useState(false)
-    const {selectedConversation, setSelectedConversation} = useConversationContext()
+    const {currConversation, messages, setMessages} = useConversationContext()
 
     useEffect(() => {
        const getMessages = async () => {
          setLoading(true)
          try{
-            const res = await fetch(`api/messages/send/${selectedConversation?.currConversation?._id}`)
+            const res = await fetch(`api/messages/send/${currConversation?._id}`)
             const data = await res.json()
-
             if(res.ok){
-               setSelectedConversation({...selectedConversation, messages: data})
+               setMessages(data)
             }else{
                 throw new Error(data.error)
             }
          }catch(error){
-            toast(error.message)
+            toast.error(error.message)
          }finally{
             setLoading(false)
          }
        }
        
-       if(selectedConversation?.currConversation?._id) getMessages()
-    },[selectedConversation?.currConversation?._id])
+       if(currConversation?._id) getMessages()
+    },[currConversation?._id, setMessages])
     
-  return { messages : selectedConversation.messages , loading} 
+  return { messages , loading} 
 
 }
 

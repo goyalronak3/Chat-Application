@@ -5,6 +5,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom"
 import { AuthContextProvider } from './context/AuthContext';
 import { ConversationContextProvider } from './context/ConversationContext';
+import { SocketContextProvider } from './context/SocketContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     <BrowserRouter>
      <AuthContextProvider>
       <ConversationContextProvider>
-      <App />
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
       </ConversationContextProvider>
      </AuthContextProvider>
     </BrowserRouter>

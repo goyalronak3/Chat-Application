@@ -23,7 +23,7 @@ const useLogout = () => {
             }
 
         }catch(error){
-            toast(error)
+            toast.error(error)
         }finally{
             setLoading(false)
         }

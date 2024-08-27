@@ -24,7 +24,7 @@ const useLogin = () => {
                 throw new Error(data.error)
             }
         }catch(error){
-            toast(error.message)
+            toast.error(error.message)
         }finally{
             setLoading(false)
         }
@@ -38,7 +38,7 @@ const useLogin = () => {
 // i personally prefer doing it on server side and use that error to show on client side
 function handleInputErrors(username, password){
     if(!username || !password ){
-        toast("Please fill in all fields")
+        toast.error("Please fill in all fields")
         return false;
     }
     return true

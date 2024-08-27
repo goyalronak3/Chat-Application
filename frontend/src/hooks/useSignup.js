@@ -6,7 +6,7 @@ import { useAuthContext } from "../context/AuthContext"
 
 const useSignup = () => {
        const [loading, setLoading] = useState(false)
-       const {authUser, setAuthUser} = useAuthContext()
+       const { setAuthUser} = useAuthContext()
 
        const signup = async ({fullName, username, password, confirmPassword, gender}) => {
             const success = handleInputErrors({fullName, username, password, confirmPassword, gender})
@@ -27,7 +27,7 @@ const useSignup = () => {
                     throw new Error(data.error)
                 }
             }catch(error){
-                toast(error.message)
+                toast.error(error.message)
             } finally {
                 setLoading(false)
             }
@@ -40,11 +40,11 @@ const useSignup = () => {
 // i personally prefer doing it on server side and use that error to show on client side
 function handleInputErrors({fullName, username, password, confirmPassword, gender}){
     if(!fullName || !username || !password || !confirmPassword || !gender){
-        toast("Please fill in all fields")
+        toast.error("Please fill in all fields")
         return false;
     }
     if(password !== confirmPassword){
-        toast("password does not match")
+        toast.error("password does not match")
         return  false
     }
     if(password.length < 6){
